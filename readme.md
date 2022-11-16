@@ -1,11 +1,10 @@
+# Loaning API
 
-# Typescript - Express - Template
 
-## ⚒️Tech Stack
-- Typescript  - Language
-- Express - Microframework
-- MongoDB and Mongoose - NoSQL Database
-- JWT - 
-- swagger-jsdoc - Documenting API for swagger as docs
-- swagger-ui-express - Showing swagger docs
-- 
+# Todo
+
+ - [ ] Setup configurations
+ - [ ] Setup Dockerfile
+ - [ ] Setup CI Pipeline
+ - [ ] Setup Tests
+ - [ ] System Design
