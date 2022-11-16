@@ -7,9 +7,9 @@
     "sourceMap": true,
     "module": "commonjs",
     "paths": {
-      "@business-logic/*": ["src/business-logic/*"],
-      "@domain/*": ["./src/domain/*"],
-      "@web/*": ["src/web/*"]
+      "Logic/*": ["logic/*"],
+      "Domain/*": ["./domain/*"],
+      "Web/*": ["./web/*"]
     },
     "outDir": "dist",
     "rootDir": "./",
@@ -21,6 +21,6 @@
     "skipLibCheck": true
   },
   "include": ["**/*"],
-  "exclude": ["node_modules", "build"]
+  "exclude": ["node_modules", "dist"]
 }
 

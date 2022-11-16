@@ -5,7 +5,7 @@ import helmet from "helmet";
 import routes from "../routes";
 import swaggerSpec from "../utils/swagger";
 import swaggerUi from "swagger-ui-express";
-// import { DbContext } from "@data-layer/DbContext";
+// import { DbContext } from "@domain/DbContext";
 
 const health = require("express-ping");
 
