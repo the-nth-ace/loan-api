@@ -3,6 +3,8 @@
 
 # Todo
 
+[//]: # (TODO)
+
  - [ ] Setup configurations
  - [ ] Setup Dockerfile
  - [X] Setup CI Pipeline
@@ -10,5 +12,5 @@
  - [ ] System Design
 
 ---
-- [ ] Activate User UseCase
+- [X] Activate User UseCase
 - [ ] Forgot Password UseCase

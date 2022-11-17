@@ -43,3 +43,12 @@ export class NotFoundError extends HttpError {
     });
   }
 }
+
+export class BadRequestError extends HttpError {
+  constructor(msg: string, statusCode?: number) {
+    super({
+      msg: msg || "Bad Request",
+      statusCode: 4001,
+    });
+  }
+}
