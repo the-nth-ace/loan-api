@@ -7,7 +7,7 @@
     "sourceMap": true,
     "module": "commonjs",
     "paths": {
-      "Logic/*": ["logic/*"],
+      "Logic/*": ["./logic/*"],
       "Domain/*": ["./domain/*"],
       "Web/*": ["./web/*"]
     },
