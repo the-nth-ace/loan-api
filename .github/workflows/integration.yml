@@ -7,7 +7,6 @@ on:
     branches: [ "main" ]
 
 jobs:
-jobs:
   cache-and-install:
     runs-on: ubuntu-latest
 
