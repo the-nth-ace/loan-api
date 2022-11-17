@@ -2,10 +2,10 @@ import express, { Request, Response } from "express";
 import bodyParser from "body-parser";
 import cors from "cors";
 import helmet from "helmet";
-import routes from "@web/routes/index";
-import swaggerSpec from "@web/utils/swagger";
+import routes from "../routes";
+import swaggerSpec from "../utils/swagger";
 import swaggerUi from "swagger-ui-express";
-// import { DbContext } from "@data-layer/DbContext";
+// import { DbContext } from "@domain/DbContext";
 
 const health = require("express-ping");
 

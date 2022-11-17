@@ -6,13 +6,13 @@
     "moduleResolution": "node",
     "sourceMap": true,
     "module": "commonjs",
-    "baseUrl": ".",
     "paths": {
-      "@business-logic/*": ["src/business-logic/*"],
-      "@domain/*": ["./src/domain/*"],
-      "@web/*": ["src/web/*"]
+      "Logic/*": ["logic/*"],
+      "Domain/*": ["./domain/*"],
+      "Web/*": ["./web/*"]
     },
     "outDir": "dist",
+    "rootDir": "./",
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
 
@@ -20,6 +20,7 @@
     "strictPropertyInitialization": false,
     "skipLibCheck": true
   },
-  "include": ["src/**/*"]
+  "include": ["**/*"],
+  "exclude": ["node_modules", "dist"]
 }
 

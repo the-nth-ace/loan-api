@@ -5,10 +5,10 @@ export default {
   collectCoverage: true,
   coverageDirectory: "coverage",
   coverageProvider: "v8",
-  roots: ["<rootDir>", "./src"],
+  roots: ["<rootDir>"],
   moduleNameMapper: {
-    "^@data-layer/(.*)$": "<rootDir>/src/data-layer/$1",
-    "^@web/(.*)$": "<rootDir>/src/web/$1",
-    "^@business-logic/(.*)$": "<rootDir>/src/business-logic/$1",
+    "^Logic/(.*)$": "<rootDir>/logic/$1",
+    "^Web/(.*)$": "<rootDir>/web/$1",
+    "^Domain/(.*)$": "<rootDir>/domain/$1",
   },
 };
