@@ -1,4 +1,4 @@
-import { SignupUserDto, SignupUserUseCase } from "Logic/auth/";
+import { SignUpUserDto, SignUpUserUseCase } from "Logic/auth/";
 import { TestUserRepository } from "Domain/auth/";
 import { IUser, UserStatus } from "Domain/auth";
 import { InternalServerError } from "Logic/common";
@@ -19,12 +19,12 @@ describe("Signup User use case", () => {
   mockedCreate.mockImplementation(async () => {
     return Promise.resolve(dummyUser);
   });
-  const dto: SignupUserDto = {
+  const dto: SignUpUserDto = {
     confirm_password: "",
     email: "",
     password: "",
   };
-  const useCase = new SignupUserUseCase(repo, dto);
+  const useCase = new SignUpUserUseCase(repo, dto);
   it("Should be defined", () => {
     expect(useCase).toBeDefined();
   });
@@ -44,15 +44,5 @@ describe("Signup User use case", () => {
   it("should call _userRepo.create on execute()", async () => {
     await useCase.execute();
     expect(mockedCreate).toHaveBeenCalled();
-  });
-
-  it("should throw an InternalServerError when there is no user", async () => {
-    mockedCreate.mockImplementation(async () => {
-      throw Error();
-    });
-
-    expect(async () => {
-      await useCase.execute();
-    }).toThrowError(Error);
   });
 });

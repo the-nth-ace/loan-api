@@ -1,13 +1,12 @@
 import { IUser, IUserRepository } from "Domain/auth";
-import { SignupUserDto } from "Logic/auth";
+import { SignUpUserDto } from "Logic/auth";
 import { SingleEmailDTO } from "Logic/common/interfaces";
 import EmailService from "Logic/common/services/EmailService";
-import { InternalServerError } from "Logic/common";
 
-export class SignupUserUseCase {
+export class SignUpUserUseCase {
   constructor(
     private _userRepo: IUserRepository,
-    private _dto: SignupUserDto
+    private _dto: SignUpUserDto
   ) {}
 
   async execute(): Promise<undefined> {
@@ -16,9 +15,6 @@ export class SignupUserUseCase {
       email,
       password,
     });
-    if (!user) {
-      throw new InternalServerError("Something went wrong while creating user");
-    }
     this.sendActivationMailToUser(user);
     return;
   }
