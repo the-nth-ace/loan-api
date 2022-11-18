@@ -1,3 +1,4 @@
+import "reflect-metadata";
 import { ExpressConfig } from "./Express";
 
 export class Application {

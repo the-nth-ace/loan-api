@@ -1,10 +1,8 @@
 import { SignUpUserDto, SignUpUserUseCase } from "Logic/auth/";
-import { TestUserRepository } from "Domain/auth/";
 import { IUser, UserStatus } from "Domain/auth";
-import { InternalServerError } from "Logic/common";
+import { usersRepository } from "Logic/common";
 
 describe("Signup User use case", () => {
-  const repo = new TestUserRepository();
   const dummyUser: IUser = {
     auth_level: 0,
     created_at: new Date(),
@@ -14,8 +12,7 @@ describe("Signup User use case", () => {
     status: UserStatus.INACTIVE,
     updated_at: new Date(),
   };
-  const mockedCreate = jest.spyOn(repo, "create");
-
+  const mockedCreate = jest.spyOn(usersRepository, "create");
   mockedCreate.mockImplementation(async () => {
     return Promise.resolve(dummyUser);
   });
@@ -24,25 +21,17 @@ describe("Signup User use case", () => {
     email: "",
     password: "",
   };
-  const useCase = new SignUpUserUseCase(repo, dto);
+  const useCase = SignUpUserUseCase;
   it("Should be defined", () => {
     expect(useCase).toBeDefined();
-  });
-
-  it("should have a _userRepo property", () => {
-    expect(useCase).toHaveProperty("_userRepo");
-  });
-
-  it("should have a _dto property", () => {
-    expect(useCase).toHaveProperty("_dto");
   });
 
   it("should have an execute method", () => {
     expect(useCase.execute).toBeDefined();
   });
 
-  it("should call _userRepo.create on execute()", async () => {
-    await useCase.execute();
+  it("should call _serRepo.create on execute()", async () => {
+    await useCase.execute(dto);
     expect(mockedCreate).toHaveBeenCalled();
   });
 });

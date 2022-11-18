@@ -1,12 +1,13 @@
 import { ActivateUserUseCase } from "Logic/auth";
-import { TestUserRepository } from "Domain/auth";
+import { usersRepository } from "Logic/common";
+import { UserStatus } from "../../../domain";
 
 describe("Activate User Use Case", () => {
-  const repo = new TestUserRepository();
-  const dto: any = {};
   const id = "122344";
-  const mockedFindOne = jest.spyOn(repo, "findOne");
-  const mockedUpdate = jest.spyOn(repo, "update");
+  const dto: any = {};
+
+  const mockedFindOne = jest.spyOn(usersRepository, "findOne");
+  const mockedUpdate = jest.spyOn(usersRepository, "update");
 
   mockedFindOne.mockImplementation(async () => {
     return dto;
@@ -15,35 +16,25 @@ describe("Activate User Use Case", () => {
     return dto;
   });
 
-  const useCase = new ActivateUserUseCase(repo, id, dto);
+  const useCase = ActivateUserUseCase;
 
   it("Should be defined", () => {
     expect(useCase).toBeDefined();
   });
 
-  it("Should have a private _userRepo property", () => {
-    expect(useCase).toHaveProperty("_userRepo");
+  it("Should have an execute property", () => {
+    expect(useCase).toHaveProperty("execute");
   });
 
-  it("Should have a _userId property", () => {
-    expect(useCase).toHaveProperty("_userId");
+  it("Should call userRepository.findOne() with userId and dto when execute() is called", async () => {
+    await useCase.execute(id, dto);
+    expect(mockedFindOne).toHaveBeenCalledWith(id);
   });
 
-  it("Should have a private _dto property", () => {
-    expect(useCase).toHaveProperty("_dto");
-  });
-
-  it("Should have a public execute method", () => {
-    expect(useCase.execute).toBeDefined();
-  });
-
-  it("Should call _userRepo.findOne() when execute() is called", async () => {
-    await useCase.execute();
-    expect(mockedFindOne).toHaveBeenCalled();
-  });
-
-  it("Should call _userRepo.update() when execute() is called", async () => {
-    await useCase.execute();
-    expect(mockedUpdate).toHaveBeenCalled();
+  it("Should call userRepository.update() when execute() is called", async () => {
+    await useCase.execute(id, dto);
+    expect(mockedUpdate).toHaveBeenCalledWith(id, {
+      status: UserStatus.ACTIVE,
+    });
   });
 });

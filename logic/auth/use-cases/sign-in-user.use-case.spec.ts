@@ -1,7 +1,7 @@
-import { SigninUserUseCase } from "Logic/auth/use-cases/signin-user.use-case";
+import { SignInUserUseCase } from "./sign-in-user.use-case";
 
 describe("SignIn User Use Case", () => {
-  const useCase = new SigninUserUseCase();
+  const useCase = new SignInUserUseCase();
 
   it("Should be defined", () => {
     expect(useCase).toBeDefined();
