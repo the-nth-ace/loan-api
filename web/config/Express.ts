@@ -3,8 +3,8 @@ import bodyParser from "body-parser";
 import cors from "cors";
 import helmet from "helmet";
 import routes from "../routes";
-import swaggerSpec from "../utils/swagger";
-import swaggerUi from "swagger-ui-express";
+import { container, Lifecycle } from "tsyringe";
+import { IUserRepository, TestUserRepository } from "Domain/auth";
 // import { DbContext } from "@domain/DbContext";
 
 const health = require("express-ping");
@@ -21,24 +21,30 @@ export class ExpressConfig {
     this.app.use(bodyParser.json());
     this.app.use(health.ping());
     this.app.use(helmet());
+    this.registerContainer();
     this.app.use("/api/v1", routes);
-    this.setupSwagger();
-    this.app.use(this.unmatchedRoutesHandlder);
+    this.app.use(this.unmatchedRoutesHandler);
   }
 
+  /*
+   * register tokens for DI container
+   */
+  registerContainer() {
+    container.register<IUserRepository>(
+      "UserRepository",
+      {
+        useClass: TestUserRepository,
+      },
+      {
+        lifecycle: Lifecycle.Singleton,
+      }
+    );
+  }
   //   async connectDB() {
   //     await this.dbContext.connect();
   //   }
 
-  setupSwagger() {
-    this.app.use("/api/v1/docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
-    this.app.get("/api/v1/docs.json", (req: Request, res: Response) => {
-      res.setHeader("Content-Types", "application/json");
-      res.send(swaggerSpec);
-    });
-  }
-
-  unmatchedRoutesHandlder(req: Request, res: Response) {
+  unmatchedRoutesHandler(req: Request, res: Response) {
     res.status(404).json({
       error: {
         name: "Error",
